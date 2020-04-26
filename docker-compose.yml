@@ -1,0 +1,12 @@
+version: "3"
+services:
+  jackboxdiscordbot:
+    build: .
+    image: mikeactually/jackbox-discord:latest
+    command: yarn start
+    environment:
+    #  - NODE_ENV=production
+    #  - GAMESLIST=PATH RELATIVE to ./src OR URL TO GAMES LIST
+    #  - JACKBOTKEY=<PUT YOUR KEY HERE AND UNCOMMENT>
+    env_file:
+      - .env

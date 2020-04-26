@@ -1,0 +1,22 @@
+{
+    "games": [
+        {
+            "name": "Sample Game",
+            "minPlayers": 1,
+            "maxPlayers": 4,
+            "pack": "jp5",
+            "audience": false
+        },
+        {
+            "name": "Example Game",
+            "minPlayers": 6,
+            "maxPlayers": 20,
+            "pack": "jp3",
+            "audience": true
+        }
+    ],
+    "packs": {
+        "jp3": "Sample Pack",
+        "jp5": "Example Pack"
+    }
+}
