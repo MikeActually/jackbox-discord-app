@@ -7,7 +7,7 @@ const client = new DiscordWrapper().getClient()
 let gameslist
 
 client.on('ready', () => {
-  gamesLoader.getList(config.envs.jackboxkey).then((response) => {
+  gamesLoader.getList(config.envs.gamesListUrl).then((response) => {
     gameslist = response
   })
   console.log(`Logged in as ${client.user.tag}!`)
