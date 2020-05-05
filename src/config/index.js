@@ -20,7 +20,26 @@ if (fs.existsSync(localPath)) {
   gamesList = new URL(gamesList)
 }
 
+let appAdmins
+try {
+  appAdmins = JSON.parse(process.env.APPADMINS)
+} catch {
+  appAdmins = process.env.APPADMINS ? [process.env.APPADMINS] : []
+}
+
+const processedAdmins = appAdmins.map((admin) => {
+  const adminParts = admin.split('#')
+  return {
+    username: adminParts[0],
+    discriminator: adminParts[1]
+  }
+})
+
 exports.envs = {
   gamesListUrl: gamesList,
-  jackboxkey: process.env.JACKBOXKEY
+  jackboxkey: process.env.JACKBOXKEY,
+  topggkey: process.env.TOPGGKEY,
+  appAdmins: processedAdmins
 }
+
+console.info('Environmentals Successfully loaded')

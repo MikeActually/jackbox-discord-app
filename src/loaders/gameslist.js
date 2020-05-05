@@ -1,33 +1,63 @@
 const axios = require('axios')
 const fs = require('fs')
-let returnedList = null
 
-function downloadGames (url) {
-  return axios.get(url)
-    .then(res => res.data)
-    .catch(error => console.log(error))
+const GameLoader = class GameLoader {
+  constructor () {
+    this.gamesList = {
+      games: [
+      ],
+      packs: {
+      }
+    }
+  }
+
+  init (path) {
+    this.gamePath = path
+    this.downloadList()
+  }
+
+  downloadGames (url) {
+    return axios.get(url)
+      .then(res => {
+        console.info('Successfully retreived gameslist')
+        return res.data
+      })
+      .catch(error => {
+        console.log(error)
+        return this.gamesList
+      })
+  };
+
+  async downloadList () {
+    console.info(`loading list from path ${this.gamePath}`)
+    switch (this.gamePath.protocol) {
+      case 'file:':
+        this.gamesList = JSON.parse(fs.readFileSync(this.gamePath, 'utf8'))
+        break
+      case 'https:':
+      case 'http:':
+        this.gamesList = await this.downloadGames(this.gamePath.toString())
+        break
+    }
+  }
+
+  getList () {
+    return this.gamesList
+  }
 }
 
-async function getList (gamePath) {
-  if (returnedList != null) {
-    console.log('stored list')
-    return returnedList
+exports.GamesListLoader = class GameLoaderWrapper {
+  constructor () {
+    if (!GameLoaderWrapper.instance) {
+      GameLoaderWrapper.instance = new GameLoader()
+    }
   }
-  switch (gamePath.protocol) {
-    case 'file:':
-      returnedList = JSON.parse(fs.readFileSync(gamePath, 'utf8'))
-      return returnedList
-    case 'https:':
-    case 'http:':
-      returnedList = await downloadGames(gamePath.toString())
-      return returnedList
-  }
-};
 
-function refreshList () {
-  returnedList = null
-  return getList()
+  init (path) {
+    GameLoaderWrapper.instance.init(path)
+  }
+
+  getList () {
+    return GameLoaderWrapper.instance.getList()
+  }
 }
-
-exports.getList = getList
-exports.refreshList = refreshList

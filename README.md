@@ -58,12 +58,26 @@ default: array defined in env -> GAMESLIST -> packs
 !jackbox game jp1 jp2 jp3
 ```
 
+### Help
+
+Displays instructions for all commands
+
+```discord
+!jackbox help
+```
+
 ## About the Project
 
-Homepage: <https://github.com/MikeActually/jackbox-discord-app#readme>
+[Homepage](https://github.com/MikeActually/jackbox-discord-app#readme)
 
-Author: Michael Heath (MikeActually)
+Author: Michael Heath
+
+Github: [MikeActually](https://github.com/)MikeActually
 
 Discord: MikeActually#3225
 
-Twitter: @themikeactually
+Twitter: [@themikeactually](https://twitter.com/themikeactually)
+
+### Donate
+
+Venmo: [MikeActually](https://venmo.com/mikeactually)

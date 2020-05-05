@@ -1,5 +1,6 @@
-const help = /^help.*/gi
-const helpmessage = 'Jackbox game picker help:\n' + //
+exports.helpIntro = 'It looks like you need some help.'
+const helpMessage =
+  'Jackbox game picker help:\n' + //
     '>>> usage: `!jackbox <command> <options>`\n' + //
     'commands: \n' + //
     ' - `game` - a random game from the Jackbox party packs\n' + //
@@ -11,15 +12,7 @@ const helpmessage = 'Jackbox game picker help:\n' + //
     'examples:\n' + //
     ' - `!jackbox game 7 players no audience jp3 jp6`\r\n' + //
     ' - `!jackbox help`'
-
-const helpbuilder = (props) => {
-  const { jackboxrequest } = props
-  help.lastIndex = 0
-  const helpinfo = help.exec(jackboxrequest)
-  if (helpinfo) {
-    return helpmessage
-  }
+exports.helpMessage = helpMessage
+exports.handleHelp = () => {
+  return helpMessage
 }
-
-exports.handle = helpbuilder
-exports.helpmessage = helpmessage

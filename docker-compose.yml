@@ -8,5 +8,7 @@ services:
     #  - NODE_ENV=production
     #  - GAMESLIST=PATH RELATIVE to ./src OR URL TO GAMES LIST
     #  - JACKBOTKEY=<PUT YOUR KEY HERE AND UNCOMMENT>
+    #  - TOPGGKEY=<TOPGGKEY>
+    #  - APPADMINS=["USERNAME#DISCRIMINATOR","USERNAME2#DISCRIMINATOR"]
     env_file:
       - .env
