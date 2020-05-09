@@ -23,7 +23,7 @@ const GameLoader = class GameLoader {
         return res.data
       })
       .catch(error => {
-        console.log(error)
+        console.error(error)
         return this.gamesList
       })
   };

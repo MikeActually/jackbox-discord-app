@@ -1,26 +1,26 @@
 const DBL = require('dblapi.js')
+const { DiscordWrapper } = require('../services/discordapiwrapper')
+const discordWrapper = new DiscordWrapper()
 
-const StatLogger = class {
-  constructor (topggkey, discordClient) {
-    this.discordBotApi = new DBL(topggkey)
-    this.discordClient = discordClient
+const StatLogger = class StatLoggerWrap {
+  constructor (topggkey, discordWrapper) {
+    StatLoggerWrap.discordBotApi = new DBL(topggkey)
+    StatLoggerWrap.discordWrapper = discordWrapper
   }
 
   postStats () {
-    this.discordBotApi.postStats(this.discordClient.guilds.cache.size)
-      .then(() => {
-        console.log('Posted stats to top.gg')
-      })
-      .catch(() => {
-        console.log('Could not post stats')
-      })
+    StatLoggerWrap.discordWrapper.updateStats().then((response) => {
+      StatLoggerWrap.discordBotApi.postStats(response)
+        .then(() => console.info('Posted stats to top.gg'))
+        .catch((ex) => console.exception('Could not post stats', ex))
+    })
   }
 }
 
 exports.startStatLogger = (props) => {
-  const { topggkey, discordclient } = props
-  if (topggkey && discordclient) {
-    const statLogger = new StatLogger(topggkey, discordclient)
+  const { topggkey } = props
+  if (topggkey) {
+    const statLogger = new StatLogger(topggkey, discordWrapper)
     statLogger.postStats()
     setInterval(statLogger.postStats, 1800000)
   }

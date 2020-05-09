@@ -8,7 +8,7 @@ const { GamesListLoader } = require('../../src/loaders/gameslist')
 const gamesListWrapper = new GamesListLoader()
 
 describe('GamesList', () => {
-  it('should return example list of games', async () => {
+  it('should return example list of games', () => {
     const localPath = path.join(__dirname, '..', '..', 'src/data/testgames.json')
     gamesListWrapper.init(url.pathToFileURL(localPath))
     expect(gamesListWrapper.getList()).to.eql(testGames)

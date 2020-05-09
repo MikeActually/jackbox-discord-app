@@ -1,12 +1,15 @@
 const { handleHelp, helpIntro, helpMessage } = require('./helphandler')
 const { handleStats } = require('./statshandler')
+const { processRoomRequest } = require('./roomhandler')
 const { randomgamehandler } = require('./randomgamehandler')
+const { ServerStats } = require('./serverstats')
+const statsService = new ServerStats().get()
 
 const messageCommands = {
   stats: handleStats,
   help: handleHelp,
   game: randomgamehandler,
-  room: () => { return 'WIP' }
+  room: processRoomRequest
 }
 
 exports.handle = (props) => {
@@ -25,6 +28,7 @@ exports.handle = (props) => {
       responseText = messageCommands[jackboxCmd]
         ? messageCommands[jackboxCmd](props)
         : null
+      statsService.logUsage(jackboxCmd, message)
     }
     return responseText || helpIntro + '\n' + helpMessage // add tag to help?
   }
