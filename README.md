@@ -72,7 +72,7 @@ Displays instructions for all commands
 
 Author: Michael Heath
 
-Github: [MikeActually](https://github.com/)MikeActually
+Github: [MikeActually](https://github.com/MikeActually)
 
 Discord: MikeActually#3225
 
