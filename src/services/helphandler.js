@@ -9,7 +9,7 @@ const helpMessage =
     'game options:\n' + //
     ' - `X players` - filter by how many players you have\n' + //
     ' - `no audience` - must have player count, but will not show games\n' + //
-    ' - `jp1 jp2 jp3 jp4 jp5 jp6` - limit which packs you want to select from\n' + //
+    ' - `jp1 jp2 jp3 jp4 jp5 jp6 jp7` - limit which packs you want to select from\n' + //
     'room options:\n' + //
     ' - `add XXXX` - add a room code to the list of codes\n' + //
     ' - `list` - gets list of room codes\n' + //

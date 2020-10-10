@@ -2,8 +2,6 @@ const { handleHelp, helpIntro, helpMessage } = require('./helphandler')
 const { handleStats } = require('./statshandler')
 const { processRoomRequest } = require('./roomhandler')
 const { randomgamehandler } = require('./randomgamehandler')
-const { ServerStats } = require('./serverstats')
-const statsService = new ServerStats().get()
 
 const messageCommands = {
   stats: handleStats,
@@ -13,22 +11,21 @@ const messageCommands = {
 }
 
 exports.handle = (props) => {
-  const jackboxformat = /^!jackbox(?: (\w+)(?: (.+))?)?$/gi
+  const jackboxformat = /^!(?:jackbox|jb)(?: (\w+)(?: (.+))?)?$/gi
   const { message } = props
   const jackboxinfo = jackboxformat.exec(message.content)
   if (jackboxinfo !== null) {
     let responseText
-    if (jackboxinfo[1] !== undefined) {
-      const jackboxCmd = jackboxinfo[1].toLowerCase()
-      const props = {
-        commandOptions: jackboxinfo[2],
-        author: message.author,
-        guild: message.guild
-      }
+    const commandProps = {
+      author: message.author,
+      guild: message.guild
+    }
+    const jackboxCmd = jackboxinfo[1] ? jackboxinfo[1].toLowerCase() : undefined
+    commandProps.commandOptions = jackboxinfo[2] ? jackboxinfo[2] : undefined
+    if (jackboxCmd) {
       responseText = messageCommands[jackboxCmd]
-        ? messageCommands[jackboxCmd](props)
+        ? messageCommands[jackboxCmd](commandProps)
         : null
-      statsService.logUsage(jackboxCmd, message)
     }
     return responseText || helpIntro + '\n' + helpMessage // add tag to help?
   }

@@ -8,11 +8,9 @@ const fakeObject = {
 DiscordWrapper.discordClient = fakeObject
 const messagehander = require('../../src/services/messagehandler')
 const testGames = require('../../src/data/testgames.json')
-const { envs } = require('../../src/config')
 const { expect } = require('chai')
 const { GamesListLoader } = require('../../src/loaders/gameslist')
 const { helpIntro, helpMessage } = require('../../src/services/helphandler')
-const { msToTime } = require('../../src/utility/timetostring')
 
 describe('MessageHandler', () => {
   describe('Jackbox', () => {
@@ -128,25 +126,6 @@ describe('MessageHandler', () => {
       const message = { content: '!jackbox nonsense', author }
       const props = { message: message, gameslist: testGames }
       expect(messagehander.handle(props)).to.equal(helpIntro + '\n' + helpMessage)
-    })
-    it('will return stats when stats are requested', () => {
-      envs().appAdmins = [{
-        username: 'testsUser', discriminator: '12345'
-      }]
-
-      const serverCount = 0
-      const uptimeInHours = msToTime(fakeObject.uptime)
-      const readyTime = fakeObject.readyAt
-      const statsmessage = `>>> Server count: ${serverCount}\n` + //
-        `Last ready date: ${readyTime}\n` + //
-        `Uptime: ${uptimeInHours}\n\n` + //
-        'Usage report:'
-
-      const message = { content: '!jackbox stats', author: envs().appAdmins[0] }
-      const props = { message: message }
-
-      const response = messagehander.handle(props)
-      expect(response).to.contain(statsmessage)
     })
   })
 })
