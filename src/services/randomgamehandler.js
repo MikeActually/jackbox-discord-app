@@ -23,7 +23,7 @@ const getgamefilters = (message, packs) => {
     }
     const options = message.split(' ')
     options.forEach(option => {
-      const packregex = /jp[1-6]/gi
+      const packregex = /jp[1-7]/gi
       if (packregex.test(option) && Object.keys(packs).includes(option.toLowerCase())) {
         thisfilter.packs.push(option.toLowerCase())
         message = message.replace(option, '')
