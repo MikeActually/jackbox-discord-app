@@ -1,17 +1,19 @@
 const { DiscordWrapper } = require('./discordapiwrapper')
+const { envs } = require('../config')
 const { msToTime } = require('../utility/timetostring')
+const discordWrapper = new DiscordWrapper()
 
 exports.handleStats = (props) => {
-  const { message, discordClient } = props
-  const STATS_PATTERN = /^!stats(?: (.+))?/gi
+  const { author } = props
+  const realClient = discordWrapper.getClient()
+  const uptimeInHours = msToTime(realClient.uptime)
+  const readyTime = realClient.readyAt // tell all shards to reply?
 
-  if (STATS_PATTERN.test(message)) {
-    const realClient = discordClient || new DiscordWrapper().getClient()
-    const serverCount = realClient.guilds.cache.size
-    const uptimeInHours = msToTime(realClient.uptime)
-    const readyTime = realClient.readyAt
-    return `>>> Server count: ${serverCount}\n` + //
+  if (envs().appAdmins &&
+    envs().appAdmins.filter(admin => admin.username === author.username &&
+      admin.discriminator === author.discriminator).length > 0) {
+    return `>>> Server count: ${discordWrapper.getServerCount()}\n` + //
     `Last ready date: ${readyTime}\n` + //
-    `Uptime: ${uptimeInHours}`
+    `Uptime: ${uptimeInHours}` + '\n\n'
   }
 }

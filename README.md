@@ -28,7 +28,7 @@ A Discord bot that will respond with a random game from within the Jackbox Party
 #### players
 
 Defines the number of players desired to be supported
-default: 1
+default: none
 
 ```discord
 !jackbox game 99players
@@ -52,18 +52,68 @@ default: true
 #### packs
 
 Allows to limit game choices to specific packs
-default: array defined in env -> GAMESLIST -> packs
+default: all
 
 ```discord
 !jackbox game jp1 jp2 jp3
 ```
 
+### Room
+
+Add a room for others to join or list available rooms
+
+```discord
+!jackbox room add CODE DESCRIPTION
+```
+
+```discord
+!jackbox room list
+```
+
+#### Add room code
+
+Execute command replacing CODE with your room code.
+
+```discord
+!jackbox room add CODE
+```
+
+Optionally provide a description for bot users to find your stream and identify your game
+
+```discord
+!jackbox room add CODE 100 character or less description, such as game and twitch name
+```
+
+#### List rooms
+
+Lists the most recent 20 rooms added to the database that are no more than 20 minutes old.
+
+```discord
+!jackbox room list
+```
+
+### Help
+
+Displays instructions for all commands
+
+```discord
+!jackbox help
+```
+
 ## About the Project
 
-Homepage: <https://github.com/MikeActually/jackbox-discord-app#readme>
+[Homepage](https://github.com/MikeActually/jackbox-discord-app#readme)
 
-Author: Michael Heath (MikeActually)
+Author: Michael Heath
+
+Github: [MikeActually](https://github.com/MikeActually)
 
 Discord: MikeActually#3225
 
-Twitter: @themikeactually
+Twitter: [@themikeactually](https://twitter.com/themikeactually)
+
+[![Discord Bots](https://top.gg/api/widget/556815176674836480.svg)](https://top.gg/bot/556815176674836480)
+
+### Donate
+
+Venmo: [MikeActually](https://venmo.com/mikeactually)
