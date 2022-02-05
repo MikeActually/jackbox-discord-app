@@ -22,31 +22,25 @@ A Discord bot that will respond with a random game from within the Jackbox Party
 ### Random Game
 
 ```discord
-!jackbox game
+/jackboxrandom players: 3
 ```
 
 #### players
 
 Defines the number of players desired to be supported
-default: none
+required
 
 ```discord
-!jackbox game 99players
-!jackbox game 99p
-!jackbox game 99 p
-!jackbox game 1 player
-!jackbox game 1player
+/jackboxrandom players: 3
 ```
 
 #### audience
 
 Allows player count overages to spill into audience, if game supports it
-default: true
+default: false
 
-```discord
-!jackbox game 99players noaudience
-!jackbox game 99players no audience
-!jackbox game 99players audience
+```
+/jackboxrandom players: 3 audience: true
 ```
 
 #### packs
@@ -54,50 +48,12 @@ default: true
 Allows to limit game choices to specific packs
 default: all
 
-```discord
-!jackbox game jp1 jp2 jp3
+```
+/jackboxrandom players: 3 packs: 1,5,8
 ```
 
-### Room
-
-Add a room for others to join or list available rooms
-
-```discord
-!jackbox room add CODE DESCRIPTION
 ```
-
-```discord
-!jackbox room list
-```
-
-#### Add room code
-
-Execute command replacing CODE with your room code.
-
-```discord
-!jackbox room add CODE
-```
-
-Optionally provide a description for bot users to find your stream and identify your game
-
-```discord
-!jackbox room add CODE 100 character or less description, such as game and twitch name
-```
-
-#### List rooms
-
-Lists the most recent 20 rooms added to the database that are no more than 20 minutes old.
-
-```discord
-!jackbox room list
-```
-
-### Help
-
-Displays instructions for all commands
-
-```discord
-!jackbox help
+/jackboxrandom players: 3 packs: pack1,pack5,pack8
 ```
 
 ## About the Project

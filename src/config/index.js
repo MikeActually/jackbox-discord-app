@@ -22,24 +22,11 @@ const buildEnv = () => {
     gamesList = new URL(gamesList)
   }
 
-  let appAdmins
-  try {
-    appAdmins = JSON.parse(process.env.APPADMINS)
-  } catch {
-    appAdmins = process.env.APPADMINS ? [process.env.APPADMINS] : []
-  }
-
-  const processedAdmins = appAdmins.map((admin) => {
-    const adminParts = admin.split('#')
-    return {
-      username: adminParts[0],
-      discriminator: adminParts[1]
-    }
-  })
   envs.gamesListUrl = gamesList
   envs.jackboxkey = process.env.JACKBOXKEY
   envs.topggkey = process.env.TOPGGKEY
-  envs.appAdmins = processedAdmins
+  envs.appId = process.env.APPID
+  envs.guildId = process.env.GUILDID
   console.info('Environmentals Successfully loaded')
 }
 

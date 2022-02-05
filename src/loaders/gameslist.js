@@ -26,7 +26,7 @@ const GameLoader = class GameLoader {
         console.error(error)
         return this.gamesList
       })
-  };
+  }
 
   async downloadList () {
     console.info(`loading list from path ${this.gamePath}`)
