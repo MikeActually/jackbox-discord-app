@@ -3,9 +3,9 @@ const { DiscordWrapper } = require('../services/discordapiwrapper')
 const discordWrapper = new DiscordWrapper()
 
 const StatLogger = class StatLoggerWrap {
-  constructor (topggkey, discordWrapper) {
+  constructor (topggkey, discordWrapperParam) {
     StatLoggerWrap.discordBotApi = new DBL(topggkey)
-    StatLoggerWrap.discordWrapper = discordWrapper
+    StatLoggerWrap.discordWrapper = discordWrapperParam
   }
 
   postStats () {

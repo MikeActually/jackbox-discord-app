@@ -2,6 +2,8 @@
 .git
 .gitignore
 .vscode
+.nyc_output
+.env
 Dockerfile
 node_modules
 test
